@@ -4,14 +4,23 @@ create synthetic dataset in Robust Classification
 
 # load packages
 import os
+import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 plt.style.use("ggplot")
 
+# ======= parameters ========
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--data', nargs='+', default=['cont', 'dis'], type=str, help='select the type of synthetic dataset to generate')
+parser.add_argument('--seed', default=42, type=int, help='the seed for generating dataset')
+
+args = parser.parse_args()
+
 # fix seed
-SEED = 20
+SEED = args.seed
 np.random.seed(SEED)
 
 # path
@@ -141,5 +150,7 @@ def make_syn_discrete():
 
 
 if __name__ == "__main__":
-    make_syn_cont()
-    make_syn_discrete()
+    if 'cont' in args.data:
+        make_syn_cont()
+    if 'dis' in args.data:
+        make_syn_discrete()
