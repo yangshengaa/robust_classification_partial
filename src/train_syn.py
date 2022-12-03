@@ -38,8 +38,9 @@ parser.add_argument(
 # penalization
 parser.add_argument(
     "--gamma-list",
-    default=[0, 1e-3, 1e-2, 1e-1, 1, 10],
+    default=[1e-3, 1e-2, 1e-1, 1, 10],
     nargs="+",
+    type=float,
     help="the list of penalization terms to try",
 )
 parser.add_argument(
