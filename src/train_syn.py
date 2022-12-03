@@ -6,7 +6,7 @@ import numpy as np
 import argparse
 
 # load file
-from models import LRRegular, LRRobust
+from models import LRRegular, LRRobust, SVMRegular, SVMRobust
 from data import load_syn
 from evaluation import *
 
@@ -67,11 +67,11 @@ def select_model(gamma: float):
             gamma, selected_terms, epochs=args.epochs, lr=args.lr, verbose=args.verbose
         )
     elif args.model == "SVMRegular":
-        raise NotImplementedError()
+        return SVMRegular(gamma, selected_terms, verbose=args.verbose)
     elif args.model == "SVMRobust":
-        raise NotImplementedError()
+        return SVMRobust(gamma, selected_terms, verbose=args.verbose)
     else:
-        raise NotImplementedError()
+        raise NotImplementedError(f'model {args.model} not defined')
 
 
 # ========= training =============
@@ -89,7 +89,9 @@ def train():
         val_predict = model.predict(X_val)
         val_acc = (val_predict == y_val).mean()
 
-        print(f"gamma {gamma:.4f}: train acc {train_acc:.4f}, validation acc {val_acc:.4f}")
+        print(
+            f"gamma {gamma:.4f}: train acc {train_acc:.4f}, validation acc {val_acc:.4f}"
+        )
         if val_acc > best_acc:
             best_beta = (model.beta,)
             best_b = model.b
@@ -97,7 +99,6 @@ def train():
             best_model = model
             best_acc = val_acc
 
-    print(best_beta, best_b)
     # test
     test_predict = best_model.predict(X_test)
     test_acc = (test_predict == y_test).mean()
