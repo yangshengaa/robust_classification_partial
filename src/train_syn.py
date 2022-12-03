@@ -45,6 +45,7 @@ parser.add_argument(
 parser.add_argument(
     "--terms",
     default=None,
+    type=int,
     nargs="+",
     help="the index selected to robustify/penalize. Default penalizes all",
 )
