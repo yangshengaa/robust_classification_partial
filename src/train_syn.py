@@ -26,7 +26,7 @@ parser.add_argument(
     "--model", default="LRRegular", type=str, help="the type of model to train"
 )
 parser.add_argument(
-    "--lr", default=1e-3, type=float, help="LR specific: learning rate of SGD"
+    "--lr", default=1e-2, type=float, help="LR specific: learning rate of SGD"
 )
 parser.add_argument(
     "--epochs", default=3000, type=int, help="LR specific: epochs to run SGD"
@@ -72,7 +72,7 @@ def select_model(gamma: float):
     elif args.model == "SVMRobust":
         return SVMRobust(gamma, selected_terms, verbose=args.verbose)
     else:
-        raise NotImplementedError(f'model {args.model} not defined')
+        raise NotImplementedError(f"model {args.model} not defined")
 
 
 # ========= training =============
@@ -94,7 +94,7 @@ def train():
             f"gamma {gamma:.4f}: train acc {train_acc:.4f}, validation acc {val_acc:.4f}"
         )
         if val_acc > best_acc:
-            best_beta = (model.beta,)
+            best_beta = model.beta
             best_b = model.b
             best_gamma = gamma
             best_model = model

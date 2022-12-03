@@ -11,7 +11,7 @@ import gurobipy as gp
 from gurobipy import GRB
 
 # allowing nonconvex constraints
-gp.setParam('NonConvex', 2)  
+gp.setParam("NonConvex", 2)
 
 
 class SVMBase:
@@ -75,13 +75,13 @@ class SVMRegular(SVMBase):
         # initialize model
         n, p = X.shape
         model = gp.Model("SVMRegular")
-        
+
         if not verbose:
             model.setParam("OutputFlag", 0)
 
         # -------- scalar parameters -------
         # suffices to search within a unit cube, since only the direction matters
-        beta = model.addVars(range(p), vtype=GRB.CONTINUOUS, lb=-1, ub=1)
+        beta = model.addVars(range(p), vtype=GRB.CONTINUOUS, lb=-10, ub=10)
         b = model.addVar(vtype=GRB.CONTINUOUS)
         xi = model.addVars(range(n), vtype=GRB.CONTINUOUS)
         beta_norm = model.addVar(vtype=GRB.CONTINUOUS)
@@ -138,7 +138,7 @@ class SVMRobust(SVMBase):
 
         # -------- scalar parameters -------
         beta = model.addVars(
-            range(p), vtype=GRB.CONTINUOUS, lb=-1, ub=1
+            range(p), vtype=GRB.CONTINUOUS, lb=-10, ub=10
         )  # suffices to search within a unit cube, since only the direction matters
         b = model.addVar(vtype=GRB.CONTINUOUS)
         xi = model.addVars(range(n), vtype=GRB.CONTINUOUS)

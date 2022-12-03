@@ -14,6 +14,6 @@ def norm_deviance(
 
     # get deviance
     deviance = np.linalg.norm(beta_train_normalized - beta_true_normalized) + abs(
-        b_train - b_true
+        b_train / beta_train[1][0] - b_true / beta_true[1][0]
     )
     return deviance
