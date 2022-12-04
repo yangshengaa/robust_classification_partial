@@ -14,8 +14,16 @@ plt.style.use("ggplot")
 # ======= parameters ========
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--data', nargs='+', default=['cont', 'dis'], type=str, help='select the type of synthetic dataset to generate')
-parser.add_argument('--seed', default=42, type=int, help='the seed for generating dataset')
+parser.add_argument(
+    "--data",
+    nargs="+",
+    default=["cont", "dis"],
+    type=str,
+    help="select the type of synthetic dataset to generate",
+)
+parser.add_argument(
+    "--seed", default=42, type=int, help="the seed for generating dataset"
+)
 
 args = parser.parse_args()
 
@@ -150,7 +158,7 @@ def make_syn_discrete():
 
 
 if __name__ == "__main__":
-    if 'cont' in args.data:
+    if "cont" in args.data:
         make_syn_cont()
-    if 'dis' in args.data:
+    if "dis" in args.data:
         make_syn_discrete()

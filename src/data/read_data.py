@@ -32,4 +32,10 @@ def load_syn(folder_name: str) -> Tuple[np.ndarray]:
 
 def load_real(folder_name: str) -> Tuple[np.ndarray]:
     """load real dataset"""
-    raise NotImplementedError()
+    folder_path = os.path.join(DATA_PATH, folder_name)
+
+    # load data
+    X = np.load(os.path.join(folder_path, "X.npy"))
+    y = np.load(os.path.join(folder_path, "y.npy"))
+    selected_terms = np.load(os.path.join(folder_path, "selected_terms.npy"))
+    return X, y, selected_terms
