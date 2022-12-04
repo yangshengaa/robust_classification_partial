@@ -145,3 +145,6 @@ command/*
 # results 
 results/*
 !results/.gitkeep
+
+# notebooks
+*.ipynb

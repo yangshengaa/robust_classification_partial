@@ -10,8 +10,11 @@ Gurobi version >= 9.5.2, PyTorch >= 1.12.0
 
 ### Synthetic Dataset
 
-At root, run the following to create the synthetic dataset
+At root, run the following to create the synthetic and real dataset
 
 ```bash
-python src/data/synthetic.py
+python src/data/synthetic.py  # create synthetic dataset
+python src/data/real.py       # parse real dataset from uci
 ```
+
+Note that each takes an argument ```seed``` for reproducibity: synthetic dataset are randomly generated and some real dataset contains probabilistic imputation in parsing.
